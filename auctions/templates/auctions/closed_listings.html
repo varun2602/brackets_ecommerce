@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %} 
+{% block title %} 
+<title>Closed Listings</title>
+<style>
+    .clistings
+    {
+        border: 1px solid black;
+    }
+</style>
+{% endblock %} 
+{% block body %} 
+<h1>Closed Listings</h1>
+{% for l in listings_closed %} 
+<div class = "clistings">
+    <img src="{{l.image_url}}" alt="">
+    <a href="{% url 'listing_page' l.id %}"><h3>{{l.title}}</h3></a>
+    
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "auctions/layout.html" %}
+{% block title %} 
+<title>Filter</title>
+<style>
+    #heading
+    {
+        color:green
+    }
+    .listings_filter
+    {
+        border: 2px solid black;
+        width: 50%;
+        height: auto;
+    }
+</style>
+{% endblock %} 
+{% block body %} 
+<h2>Category:</h2> <h3 id = "heading">{{category}}</h3>
+{% for l in listings_category %}
+<div class = "listings_filter">
+<a href="{% url 'listing_page' l.id %}">
+    
+        <img src="{{l.image_url}}" alt=""><br>
+        <h3><a href="{% url 'listing_page' l.id %}">{{l.title}}</a></h3>
+        <h3>Current Price: {{l.starting_bid}}</h3>
+        <h3>Description: {{l.description}}</h3>
+    
+</a>
+</div>
+<br>
+{% endfor %}
+{% endblock %}

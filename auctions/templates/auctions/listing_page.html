@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %} 
+{% block title %} 
+<title>{{listing_specific.title}}</title>
+<style>
+    .comments
+    {
+        border: 1px solid black;
+    }
+</style>
+{% endblock %} 
+{% block body %}
+    <h1 style = "color:red">{{message}}</h1> 
+    <img src="{{listing_specific.image_url}}" alt="">
+    <h3>Current Price: {{listing_specific.starting_bid}}</h3>
+    {% if user.is_authenticated %} 
+        <form action="{% url 'listing_page' listing_specific.id %}" method = "POST">
+            {% csrf_token %} 
+            <button type="submit" class="btn btn-dark">Add to Watchlist</button>
+        </form>
+        <form action="{% url 'bid' listing_specific.id %}" method = "GET">
+            {% csrf_token %} 
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Place Bid</label>
+                <input type="number" class="form-control" id="exampleFormControlInput1" name = "lbid"> <br>
+                <button type="submit" class="btn btn-primary">Place bid</button>
+            </div>
+        </form>
+        {% if user == listing_specific.owner %} 
+            <a href="{% url 'close_listing' listing_specific.id %}"><h2>Close Listing</h2></a>
+        {% endif %}
+        <form action="{% url 'comments' listing_specific.id %}" method = "GET">
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1"><h3>Add Comment</h3></label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder = "Comments..." name = "comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <br>
+        <h2>Comments:</h2>
+        <ol>
+        {% for c in comments %} 
+            <li>
+            <div class = "comments">
+                <h4>{{c.comment_owner}}</h4>
+            </div>
+            <div class = "comments">
+                <h3>{{c.comment}}</h3>
+            </div> <br><br>
+            </li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "auctions/layout.html" %}
+{% block title %}
+<style>
+    .listings
+    {
+        border: 2px solid black;
+        width: 50%;
+        height: auto;
+    }
+    img
+    {
+        width: 100%;
+    }
+</style>
+{% endblock %}
+{% block body %}
+    <h2>Active Listings</h2>
+    <form action="{% url 'filter_category' %}" method = "GET">
+    <div class="form-group col-md-4">
+        <label for="inputState">Filter by category</label>
+        <select id="inputState" class="form-control" name = "categories">
+          <option selected>Choose...</option>
+          {% for c in categories %} 
+          <option value="{{c.id}}">{{c}}</option>
+          {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+      
+       <br>
+    {% for l in listings_all %} 
+        {% if l.is_active == True %}
+        <a href="{% url 'listing_page' l.id %}">
+        <div class = "listings">
+            <img src="{{l.image_url}}" alt=""><br>
+            <h3><a href="{% url 'listing_page' l.id %}">{{l.title}}</a></h3>
+            <h3>Current Price: {{l.starting_bid}}</h3>
+            <h3>Description: {{l.description}}</h3>
+        </div>
+        </a>
+        <br><br>
+        {% endif %}
+    {% endfor %}
+    
+{% endblock %}

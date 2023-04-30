@@ -1,0 +1,42 @@
+{% extends "auctions/layout.html" %} 
+{% block title %} 
+<title>Watchlist</title>
+<style>
+    .listings
+    {
+        border: 2px solid black;
+        width: 70%;
+        height: auto;
+    }
+   
+</style>
+{% endblock %} 
+{% block body %} 
+<h1>Watchlist</h1>
+{% if user.is_authenticated %} 
+    <ul>
+    {% for l in listings_user %}
+    <a href="{% url 'listing_page' l.listing.id %}"></a>
+    <div class = 'listings'> 
+    <li>
+        
+        
+            <!-- <img class = 'img' src="{{l.listing.image_url}}" alt=""><br> -->
+            <h3><a href="{% url 'listing_page' l.listing.id %}">{{l.listing.title}}</a></h3>
+            <h3>Current Price: {{l.listing.starting_bid}}</h3>
+            <h3>Description: {{l.listing.description}}</h3>
+        
+        
+    
+  
+    </li>
+    <a href="{% url 'remove_watchlist' l.listing.id %}">Remove from watchlist</a>
+   </div> 
+    </a>
+        <br><br>
+    {% endfor %}
+    </ul>
+{% else %} 
+<h2>Login required</h2>
+{% endif %}
+{% endblock %}
