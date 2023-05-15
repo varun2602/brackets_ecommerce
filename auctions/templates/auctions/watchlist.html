@@ -1,42 +1,64 @@
-{% extends "auctions/layout.html" %} 
-{% block title %} 
-<title>Watchlist</title>
-<style>
-    .listings
-    {
-        border: 2px solid black;
-        width: 70%;
-        height: auto;
-    }
-   
-</style>
-{% endblock %} 
-{% block body %} 
-<h1>Watchlist</h1>
-{% if user.is_authenticated %} 
-    <ul>
-    {% for l in listings_user %}
-    <a href="{% url 'listing_page' l.listing.id %}"></a>
-    <div class = 'listings'> 
-    <li>
-        
-        
-            <!-- <img class = 'img' src="{{l.listing.image_url}}" alt=""><br> -->
-            <h3><a href="{% url 'listing_page' l.listing.id %}">{{l.listing.title}}</a></h3>
-            <h3>Current Price: {{l.listing.starting_bid}}</h3>
-            <h3>Description: {{l.listing.description}}</h3>
-        
-        
-    
-  
-    </li>
-    <a href="{% url 'remove_watchlist' l.listing.id %}">Remove from watchlist</a>
-   </div> 
-    </a>
-        <br><br>
-    {% endfor %}
-    </ul>
-{% else %} 
-<h2>Login required</h2>
-{% endif %}
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    <style>
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 70%;
+            margin-bottom: 20px;
+        }
+
+        .card-body {
+            padding: 10px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .card-description {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .card-price {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .card-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #007bff;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Watchlist</h1>
+
+        {% if user.is_authenticated %}
+            {% for l in listings_user %}
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title"><a href="{% url 'listing_page' l.listing.id %}">{{ l.listing.title }}</a></h3>
+                        <p class="card-description">{{ l.listing.description }}</p>
+                        <p class="card-price">Current Price: {{ l.listing.starting_bid }}</p>
+                        <a href="{% url 'remove_watchlist' l.listing.id %}" class="card-link">Remove from watchlist</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2>Login required</h2>
+        {% endif %}
+    </div>
 {% endblock %}
