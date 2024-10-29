@@ -1,0 +1,83 @@
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+.ebextensions
+
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Environment settings
+.env
+.env.*
+
+# Django migrations
+**/migrations/**
+
+# Static files
+staticfiles/
+static/
+media/
+
+/__pycache__
+
+# Caches
+*.mo
+*.swp
+*.swo
+.DS_Store
+
+# Test reports
+coverage/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# PyCharm specific
+.idea/
+
+# VS Code specific
+.vscode/
+
+# macOS files
+*.DS_Store
+
+# Pipenv
+Pipfile.lock
+
+# Virtualenv
+venv/
+ENV/
+env/
+
+# Build files
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Celery
+celerybeat-schedule
+
+# MyPy
+.mypy_cache/
+
+# Pytest
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
