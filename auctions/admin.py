@@ -9,3 +9,4 @@ admin.site.register(models.Bid)
 admin.site.register(models.Comment)
 admin.site.register(models.watchlist)
 admin.site.register(Session)
+# Test comment
